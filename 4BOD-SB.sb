@@ -1,0 +1,217 @@
+'4BoD-SB
+
+'SPEEDUP
+'LDUtilities.ForceInvoke = 1
+'LDUtilities.UseDispatcher = "True"
+'LDUtilities.UseExpression = "True"
+'LDUtilities.Priority = 10
+
+
+MyPath = Program.Directory
+ParametersPath = MyPath + "\param.cfg"
+
+If Program.ArgumentCount > 0 Then
+  ProgramMemoryPath = Program.GetArgument(1)
+Else
+  ProgramMemoryPath = MyPath + "\program.4bn"
+EndIf
+  
+GraphicsWindow.BackgroundColor = "#B5B5B5"
+GraphicsWindow.Width = 502
+GraphicsWindow.Height = 502
+GraphicsWindow.Title = "4BoD-SB"
+GraphicsWindow.Top = Desktop.Height / 2 - 256 - 32
+GraphicsWindow.Left = Desktop.Width / 2 - 256 - 16
+GraphicsWindow.BrushColor = "#111111"
+LDGraphicsWindow.Resize = 0
+
+beginning:
+
+TFParameters = File.ReadLine(ParametersPath,1)
+AllowPause = Text.GetSubText(TFParameters,1,1)
+AllowRestart = Text.GetSubText(TFParameters,2,1)
+AllowScreenshot = Text.GetSubText(TFParameters,3,1)
+AllowZX = Text.GetSubText(TFParameters,4,1)
+FrameTime = LDMath.Base2Decimal(Text.GetSubText(TFParameters,5,4),2) * 5 + 5
+
+Local = 0
+SaveMode = 0
+ACC = 0
+Paused = 0
+
+ProgramMemory = Text.GetSubText(File.ReadLine(ProgramMemoryPath,1),1,3072)
+
+For i=1 To 16
+  For j=1 To 16
+    Screen[i][j] = 0
+  EndFor
+EndFor
+
+For i=1 To 16
+  Memory[i] = "0000"
+EndFor
+
+ProgramMemory = LDText.Replace(ProgramMemory," ","")
+
+'FLG
+For i=1 To 256
+  Command = Text.GetSubText(ProgramMemory,i * 12 - 11,12)
+  If Text.StartsWith(Command,"1011") Then
+    Flags[Text.GetSubText(Command,5,4)] = i
+  EndIf
+EndFor
+
+GraphicsWindow.KeyUp = KeyUp
+
+While "True"
+  Input = "0000"
+  KeyDown()
+  For i=1 To 256
+    Command = Text.GetSubText(ProgramMemory,i * 12 - 11,12)
+    
+    If Paused = 1 Then
+      Command = "000000000000"
+    EndIf
+      
+    'NOP
+    If Text.StartsWith(Command,"0000") Then
+      
+    'GET
+    ElseIf Text.StartsWith(Command,"0001") Then
+      ACC = Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1]
+      
+    'MOV
+    ElseIf Text.StartsWith(Command,"0010") Then
+      Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1] = ACC
+      
+    'SET
+    ElseIf Text.StartsWith(Command,"0011") Then
+      ACC = Text.GetSubText(Command,5,4)
+      
+    'BTN
+    ElseIf Text.StartsWith(Command,"0100") Then
+      ACC = Input
+      
+    'INC
+    ElseIf Text.StartsWith(Command,"0101") Then
+      ACC = LDMath.Base2Decimal(ACC,2) + 1
+      If ACC = 16 Then
+        ACC = 0
+      EndIf
+      ACC = LDMath.Decimal2Base(ACC,2)
+      
+    'CLS
+    ElseIf Text.StartsWith(Command,"0110") Then
+      For d=1 To 16
+        For j=1 To 16
+          Screen[d][j] = 0
+        EndFor
+      EndFor
+      
+    'SHL
+    ElseIf Text.StartsWith(Command,"0111") Then
+      ACC = Text.Append(Text.GetSubText(ACC,2,3),"0")
+      
+    'SHR
+    ElseIf Text.StartsWith(Command,"1000") Then
+      ACC = Text.Append("0",Text.GetSubText(ACC,1,3))
+      
+    'GPX
+    ElseIf Text.StartsWith(Command,"1001") Then  
+      ACC = Screen[LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,9,4),2) + 1],2) + 1][LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1],2) + 1]
+      
+    'FLP
+    ElseIf Text.StartsWith(Command,"1010") Then  
+      Screen[LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,9,4),2) + 1],2) + 1][LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1],2) + 1] = -Screen[LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,9,4),2) + 1],2) + 1][LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1],2) + 1] + 1
+      
+    'FLG
+    ElseIf Text.StartsWith(Command,"1011") Then 
+      
+    'JMP
+    ElseIf Text.StartsWith(Command,"1100") Then
+      i = Flags[Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1]]
+      If Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1] = "1111" Then
+        Program.End()
+      EndIf
+      
+    'IFE
+    ElseIf Text.StartsWith(Command,"1101") Then
+      If LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1],2) = LDMath.Base2Decimal(ACC,2) Then
+      Else
+        i = i + 1
+      EndIf
+      
+    'IFG
+    ElseIf Text.StartsWith(Command,"1110") Then
+      If LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1],2) > LDMath.Base2Decimal(ACC,2) Then
+      Else
+        i = i + 1
+      EndIf
+      
+    'IFL
+    ElseIf Text.StartsWith(Command,"1111") Then
+      If LDMath.Base2Decimal(Memory[LDMath.Base2Decimal(Text.GetSubText(Command,5,4),2) + 1],2) < LDMath.Base2Decimal(ACC,2) Then
+      Else
+        i = i + 1
+      EndIf
+      
+    EndIf
+    
+  EndFor
+  For i=1 To 16
+    For j=1 To 16
+      If Screen[j][i] = 0 Then
+        GraphicsWindow.BrushColor = "#B5B5B5"
+        GraphicsWindow.FillRectangle((i-1) * 32,(j-1) * 32,32,32)
+      ElseIf Screen[j][i] = 1 Then
+        GraphicsWindow.BrushColor = "#111111"
+        GraphicsWindow.FillRectangle((i-1) * 32,(j-1) * 32,32,32)
+      EndIf
+    EndFor
+  EndFor
+  If GraphicsWindow.LastKey = "Back" And AllowRestart = 1 Then
+    Goto beginning
+  EndIf
+  Program.Delay(FrameTime)
+EndWhile  
+
+Sub KeyUp
+  If GraphicsWindow.LastKey = "Escape" And AllowPause = 1 Then
+    Paused = -Paused + 1
+  ElseIf GraphicsWindow.LastKey = "F1" Then
+    LDGraphicsWindow.Capture(MyPath + "\screenshots\image" + Array.GetItemCount(File.GetFiles(MyPath + "\screenshots")) + ".png",0)
+  EndIf
+EndSub
+  
+Sub KeyDown
+  If LDUtilities.KeyDown("Down") And AllowZX = 0 Then
+    Input = "1"
+  Else
+    Input = "0"
+  EndIf
+  If LDUtilities.KeyDown("Z") And AllowZX = 1 Then
+    Input = "1"
+  Else
+    Input = "0"
+  EndIf
+  If LDUtilities.KeyDown("Up") And AllowZX = 0 Then
+    Input = Text.Append(Input,"1")
+  Else
+    Input = Text.Append(Input,"0")
+  EndIf
+  If LDUtilities.KeyDown("X") And AllowZX = 1 Then
+    Input = "1"
+  Else
+    Input = "0"
+  EndIf
+  If LDUtilities.KeyDown("Right") Then
+    Input = Text.Append(Input,"1")
+  Else
+    Input = Text.Append(Input,"0")
+  EndIf
+  If LDUtilities.KeyDown("Left") Then
+    Input = Text.Append(Input,"1")
+  Else
+    Input = Text.Append(Input,"0")
+  EndIf
+EndSub

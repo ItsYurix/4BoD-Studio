@@ -29,10 +29,10 @@
  - <kbd>Ctrl</kbd> + <kbd>S</kbd>: Save the project;
  
 
-###Micro 0.1
+### Micro 0.1
 Download: https://drive.google.com/file/d/1zsMZ0Ldmg1JRsrbf3m8qwnp566oZk1PY/view?usp=share_link
 
-###Micro 0.2
+### Micro 0.2
  - New 4BoD-CS;
  - Deleted 4BOD-SB;
  - New FBCompiler;

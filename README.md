@@ -42,5 +42,5 @@ Download: https://drive.google.com/file/d/1zsMZ0Ldmg1JRsrbf3m8qwnp566oZk1PY/view
  - New Hotkeys: Ctrl+U, Ctrl+D;
  - Syntax Highlighting;
  - Changed file extension: .4bn -> .b
- - Total weight: 45KB;
+ - Total weight: 45KB; <br>
 Download: https://drive.google.com/file/d/1RK7IlhDDqEc26sXphd3zlG1PWoFwmnqP/view?usp=share_link

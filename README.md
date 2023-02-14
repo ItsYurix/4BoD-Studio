@@ -6,7 +6,6 @@
  - `0001`: Show help;
  - `0010`: Create new game;
  - `0011`: Open project;
- - `0100`: Save project;
  - `0101`: Delete current project;
  - `0110`: Edit current project;
  - `0111`: Open projects folder;
@@ -22,11 +21,14 @@
  - <kbd>Right</kbd>: Move Rigth;
  - <kbd>Backspace</kbd>: Delete previos bit;
  - <kbd>Escape</kbd>: Back to console;
- - <kbd>H</kbd>: Toggle help;
+ - <kbd>Enter</kbd>: Moves down to the beginning of the line;
  - <kbd>Ctrl</kbd> + <kbd>Backspace</kbd>: Clear line;
  - <kbd>Ctrl</kbd> + <kbd>U</kbd>: Swap current line with one above;
  - <kbd>Ctrl</kbd> + <kbd>D</kbd>: Swap current line with one below;
  - <kbd>Ctrl</kbd> + <kbd>S</kbd>: Save the project;
+ - <kbd>Ctrl</kbd> + <kbd>H</kbd>: Sets to hex view;
+ - <kbd>Ctrl</kbd> + <kbd>Q</kbd>: Sets to quarternary view;
+ - <kbd>Ctrl</kbd> + <kbd>B</kbd>: Sets to binary view;
  
 
 ### Micro 0.1

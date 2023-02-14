@@ -56,6 +56,6 @@ Download: https://drive.google.com/file/d/1RK7IlhDDqEc26sXphd3zlG1PWoFwmnqP/view
  - Now works only from Windows 10;
  - Deleted command 0100;
  - New hotkeys;
- - Fixed some bugs; <br>
- - Total weight 57KB;
+ - Fixed some bugs;
+ - Total weight 57KB; <br>
  Download: https://drive.google.com/file/d/1kA3VXAzXcJUJ_EcCJ3Pihh-CjkjIcp-e/view?usp=share_link

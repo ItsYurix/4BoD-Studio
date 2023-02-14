@@ -44,3 +44,15 @@ Download: https://drive.google.com/file/d/1zsMZ0Ldmg1JRsrbf3m8qwnp566oZk1PY/view
  - Changed file extension: .4bn -> .b
  - Total weight: 45KB; <br>
 Download: https://drive.google.com/file/d/1RK7IlhDDqEc26sXphd3zlG1PWoFwmnqP/view?usp=share_link
+
+### Micro 0.3
+ - Increased buffer size;
+ - Better help tab;
+ - No possability to close help tab;
+ - Backspace deletes current char;
+ - Added possability to edit in Quarternary and Hex modes;
+ - Now works only from Windows 10;
+ - Deleted command 0100;
+ - New hotkeys;
+ - Fixed some bugs; <br>
+ Download: https://drive.google.com/file/d/1kA3VXAzXcJUJ_EcCJ3Pihh-CjkjIcp-e/view?usp=share_link

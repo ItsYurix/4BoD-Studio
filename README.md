@@ -59,3 +59,12 @@ Download: https://drive.google.com/file/d/1RK7IlhDDqEc26sXphd3zlG1PWoFwmnqP/view
  - Fixed some bugs;
  - Total weight 57KB; <br>
  Download: https://drive.google.com/file/d/1kA3VXAzXcJUJ_EcCJ3Pihh-CjkjIcp-e/view?usp=share_link
+
+### Micro 0.4
+ - Changed commands;
+ - More help;
+ - Increased buffer size;
+ - Common.dll deleted;
+ - Compilation to 4BoD-Go;
+ - Total weight: 62KB; <br>
+Download: https://drive.google.com/file/d/1h7ZhyWckjptVrRA_vF0u5uDsOrwbBDcf/view?usp=share_link

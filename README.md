@@ -4,13 +4,18 @@
 ## Commands
  - `0000`: About project;
  - `0001`: Show help;
- - `0010`: Create new game;
- - `0011`: Open project;
- - `0101`: Delete current project;
- - `0110`: Edit current project;
- - `0111`: Open projects folder;
+ - `0010`: Show 4BoD help;
+ - `0011`: Shows components' versions;
+ - `0100`: Creates new project;
+ - `0101`: Creates new drawing project;
+ - `0110`: Deletes current project;
+ - `0111`: Opens project;
  - `1000`: Test current project with 4BoD-CS;
- - `1100`: Build current project;
+ - `1001`: Builds project to .4bd;
+ - `1010`: Builds project to .4bb;
+ - `1011`: Opens projects folder;
+ - `1100`: Edit current project;
+ - `1101`: Non-implemented;
  - `1110`: Clear console;
  - `1111`: Exit;
  

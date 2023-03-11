@@ -1,5 +1,5 @@
 # NibbleStudio
-4BoD-Studio is a small tool for 4BoD and BLIP-4 made by Yurix.
+NibbleStudio is a small tool for 4BoD and BLIP-4 made by Yurix.
 
 ## Commands
  - `about`  : About project;

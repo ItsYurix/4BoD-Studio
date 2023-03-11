@@ -1,35 +1,27 @@
-# 4BoD-Studio
-4BoD-Studio is a small tool for 4BoD made by Yurix.
+# NibbleStudio
+4BoD-Studio is a small tool for 4BoD and BLIP-4 made by Yurix.
 
 ## Commands
- - `0000`: About project;
- - `0001`: Show help;
- - `0010`: Show 4BoD help;
- - `0011`: Shows components' versions;
- - `0100`: Creates new project;
- - `0101`: Creates new drawing project;
- - `0110`: Deletes current project;
- - `0111`: Opens project;
- - `1000`: Test current project with 4BoD-CS;
- - `1001`: Builds project to .4bd;
- - `1010`: Builds project to .4bb;
- - `1011`: Opens projects folder;
- - `1100`: Edit current project;
- - `1101`: Non-implemented;
- - `1110`: Clear console;
- - `1111`: Exit;
+ - `about`  : About project;
+ - `new`    : Creates new project;
+ - `delete` : Deletes current project;
+ - `open`   : Opens project;
+ - `run`    : Compile and run the project;
+ - `compile`: Builds project;
+ - `folder` : Opens projects folder;
+ - `edit`   : Edit current project;
+ - `cls`    : Clear console;
+ - `exit`   : Exit;
  
 ## Editor hotkeys
  - <kbd>Up</kbd>: Move Up;
  - <kbd>Down</kbd>: Move Down;
  - <kbd>Left</kbd>: Move Left;
  - <kbd>Right</kbd>: Move Rigth;
- - <kbd>Backspace</kbd>: Delete previos bit;
+ - <kbd>Backspace</kbd>: Delete previous char;
  - <kbd>Escape</kbd>: Back to console;
- - <kbd>Enter</kbd>: Moves down to the beginning of the line;
+ - <kbd>Enter</kbd>: New Line;
  - <kbd>Ctrl</kbd> + <kbd>Backspace</kbd>: Clear line;
- - <kbd>Ctrl</kbd> + <kbd>U</kbd>: Swap current line with one above;
- - <kbd>Ctrl</kbd> + <kbd>D</kbd>: Swap current line with one below;
  - <kbd>Ctrl</kbd> + <kbd>S</kbd>: Save the project;
  - <kbd>Ctrl</kbd> + <kbd>H</kbd>: Sets to hex view;
  - <kbd>Ctrl</kbd> + <kbd>Q</kbd>: Sets to quarternary view;
@@ -73,3 +65,12 @@ Download: https://drive.google.com/file/d/1RK7IlhDDqEc26sXphd3zlG1PWoFwmnqP/view
  - Compilation to 4BoD-Go;
  - Total weight: 62KB; <br>
 Download: https://drive.google.com/file/d/1h7ZhyWckjptVrRA_vF0u5uDsOrwbBDcf/view?usp=share_link
+
+### Alpha 0.1
+ - Renamed to NibbleStudio;
+ - BLIP-4 support;
+ - Commands are text now.
+ - Assembly Compilers;
+ - Text Editor;
+ - Increased Buffer Size;
+ - Total weight: 103KB
